@@ -1,0 +1,719 @@
+Below is a founder-grade PRD v0.9 for the agentic shopping assistant / convenience OS.
+
+⸻
+
+AiPay / Agentic Shopping Assistant
+
+Founder PRD v0.9
+
+Working title
+
+AiPay Home
+
+Tagline
+
+Shopping disappears. Control stays with you.
+
+1. Executive summary
+
+AiPay Home is a consumer convenience OS for shopping. It does not own inventory, act as a retailer, or try to replace merchants. Instead, it sits above existing retailers and marketplaces and becomes the user’s trusted layer for:
+	•	product discovery
+	•	delegated decision-making
+	•	policy-based purchasing
+	•	proactive replenishment
+	•	post-purchase intervention and recovery
+
+The product is built on a progressive trust ladder:
+	•	Explore: the agent helps research and compare
+	•	Delegate: the user gives a goal; the agent executes within policy
+	•	Auto: the agent buys proactively in narrow, trusted categories
+
+This is well timed. The market is now reorganizing around agentic commerce infrastructure: Google launched the open-source Universal Commerce Protocol in January 2026, explicitly to let AI interactions turn into direct buying across businesses and payment providers; Visa, Mastercard, and PayPal are all positioning their networks and tooling for agent-driven payments and checkout.  
+
+2. Product vision
+
+Vision
+
+Create the trusted AI layer that gradually takes shopping off a household’s plate.
+
+Mission
+
+Turn shopping from a manual, repetitive, fragmented task into a managed outcome across the stores users already trust.
+
+Product thesis
+
+The winning agentic commerce product will not be “an AI chatbot with affiliate links.”
+It will be a trust, policy, and execution layer that knows:
+	•	when to recommend
+	•	when to ask
+	•	when to act
+	•	when to stop
+	•	when to undo
+
+3. Strategic framing
+
+What we are
+	•	a convenience OS
+	•	a delegated commerce layer
+	•	a trust and policy engine
+	•	a wallet-enabled purchasing orchestrator
+	•	a household operating assistant
+
+What we are not
+	•	not a retailer
+	•	not a marketplace in the traditional sense
+	•	not a generic product search app
+	•	not a coupon or affiliate site
+	•	not a “shopping chatbot” gimmick
+
+4. Why now
+
+Three market shifts make this feasible now:
+
+First, major ecosystem players are standardizing for agentic commerce. Google’s UCP is designed as an open standard for direct buying from AI surfaces, and Shopify says it co-developed UCP so agents can connect and transact with merchants more easily.  
+
+Second, payments networks are explicitly preparing for delegated transactions. Visa’s Intelligent Commerce, Mastercard Agent Pay, and PayPal’s agentic commerce tooling all point toward AI-assisted or AI-executed purchases becoming a mainstream infrastructure category rather than a fringe experiment.  
+
+Third, the retailer access layer is uneven, which creates an opening for a convenience OS. Instacart, DoorDash, Uber Direct, and Walgreens all expose meaningful APIs or partner programs; Walmart’s public APIs are real but oriented around marketplace and fulfillment workflows; Amazon’s public programmable surfaces are narrower and more controlled, like Buy with Prime and SP-API policies.  
+
+At the same time, we should assume platform friction is real. Amazon’s litigation against Perplexity over agentic shopping on Amazon is a live reminder that some retailers may view third-party shopping agents as adversarial once they start disintermediating the front door.  
+
+5. Core problem
+
+Household shopping is fragmented, repetitive, cognitively expensive, and under-optimized.
+
+Users today juggle:
+	•	many retailers
+	•	inconsistent prices
+	•	unclear availability
+	•	repeated staple buying
+	•	brand and family preferences
+	•	replenishment timing
+	•	delivery-speed tradeoffs
+	•	low-confidence high-consideration decisions
+
+What people say they want:
+	•	“Find me the right thing”
+	•	“Use the stores I already trust”
+	•	“Don’t make me repeat myself”
+	•	“Save me time without making dumb decisions”
+	•	“Only automate what you’ve earned the right to automate”
+
+6. Target user and wedge
+
+Core launch persona
+
+The household operator
+
+Usually, but not always, the mom. The person carrying the invisible shopping load:
+	•	grocery basics
+	•	household staples
+	•	pharmacy/convenience items
+	•	kids’ needs
+	•	replenishment timing
+	•	balancing price, speed, and quality
+
+Secondary personas
+	•	busy professionals living alone
+	•	dual-income families
+	•	older adults who value convenience and consistency
+	•	high-trust repeat purchasers in specific categories
+
+Initial wedge
+
+Household replenishment and delegated household buying
+
+Why this wedge:
+	•	high frequency
+	•	repeat behavior
+	•	fast trust compounding
+	•	obvious ROI
+	•	easy story to tell
+	•	lower regret than apparel/fashion/gifts
+
+7. Product principles
+	1.	Trust is the product
+	2.	Magic must be visible
+	3.	Autonomy is earned, not granted
+	4.	Explainability beats black-box cleverness
+	5.	Use your existing shops, just better
+	6.	Relief beats entertainment
+	7.	Undo matters as much as do
+	8.	Habit is built from outcomes, not gimmicks
+
+8. User value proposition
+
+Functional
+	•	saves time
+	•	reduces decision fatigue
+	•	gets better prices/speed outcomes
+	•	remembers preferences
+	•	reduces forgotten purchases
+	•	handles routine shopping
+
+Emotional
+	•	“This knows me”
+	•	“This has my back”
+	•	“This took work off my plate”
+	•	“I can trust it more each week”
+
+Brand promise
+
+Shopping disappears. Control stays with you.
+
+9. Product modes
+
+9.1 Explore
+
+User is uncertain.
+
+Examples:
+	•	“Find the best air fryer”
+	•	“Need a new office chair”
+	•	“Best healthy snacks for my kids”
+
+Agent behavior:
+	•	compares options
+	•	groups choices by needs/archetypes
+	•	explains tradeoffs
+	•	learns from reactions
+	•	does not buy without permission
+
+Success criteria:
+	•	reduced search time
+	•	strong shortlist quality
+	•	user feels understood
+
+9.2 Delegate
+
+User gives an outcome, not a detailed spec.
+
+Examples:
+	•	“Buy me a new phone”
+	•	“Restock this week’s household basics”
+	•	“Get more of the detergent we usually buy”
+
+Agent behavior:
+	•	infers preferences from history
+	•	asks only missing questions
+	•	prepares plan/cart/order
+	•	executes inside policy
+	•	escalates only when outside bounds
+
+Success criteria:
+	•	minimal clarification
+	•	high recommendation acceptance
+	•	low correction rate
+
+9.3 Auto
+
+The agent buys proactively in narrow, earned domains.
+
+Examples:
+	•	pantry staples
+	•	paper goods
+	•	pet food
+	•	vitamins
+	•	recurring pharmacy items
+	•	replacement basics with known brand/size preferences
+
+Agent behavior:
+	•	monitors likely need
+	•	chooses retailer/fulfillment according to policy
+	•	buys automatically if confidence threshold is met
+	•	notifies user
+	•	allows stop/cancel/return where possible
+
+Success criteria:
+	•	high accept/no-change rate
+	•	low regret
+	•	low returns
+	•	trust expansion
+
+10. Habit formation and trust design
+
+This is a critical system, not a garnish.
+
+10.1 Core hook loop
+
+The user should feel four things in the first session:
+
+Recognition
+“It already knows how my household shops.”
+
+Competence
+“It handled a real task well.”
+
+Transparency
+“I understand why it chose that.”
+
+Progression
+“It earns more power over time.”
+
+10.2 First-session magic
+
+The first 10 minutes should create a compressed proof of competence.
+
+Target first-session outputs:
+	•	“I found your likely repeat household items”
+	•	“Here are your top stores”
+	•	“Here are likely overpayments”
+	•	“Here are 3 categories safe to automate later”
+	•	“Want me to rebuild your essentials basket?”
+
+10.3 Habit-forming mechanics
+
+No childish badges. No fake gamification.
+
+Use premium, adult habit design:
+	•	time saved this week
+	•	decisions removed from your plate
+	•	dollars saved
+	•	household categories unlocked
+	•	zero-regret streak
+	•	trust score improvements by category
+	•	“autopilot eligible” milestones
+
+10.4 Trust progression ladder
+
+Per category:
+	•	L0 View only
+	•	L1 Recommend only
+	•	L2 Build cart
+	•	L3 Buy with approval
+	•	L4 Buy unless stopped
+	•	L5 Proactive buy within policy
+
+Inputs to trust score:
+	•	acceptance rate
+	•	correction rate
+	•	return rate
+	•	repeat purchase consistency
+	•	category volatility
+	•	merchant reliability
+	•	user feedback
+	•	speed of approval
+	•	spend sensitivity
+
+11. Product scope for MVP
+
+In scope
+	•	household staples and replenishment
+	•	multi-retailer comparison for supported rails
+	•	user profile + policy onboarding
+	•	order plan generation
+	•	delegated buying
+	•	proactive reorder suggestions
+	•	limited category auto-buy
+	•	notification and cancel window
+	•	order history and rationale
+	•	simple post-purchase support
+
+Out of scope for MVP
+	•	apparel/fashion styling
+	•	gifting
+	•	furniture
+	•	broad luxury shopping
+	•	travel booking
+	•	complex subscriptions across many providers
+	•	full returns automation across all merchants
+	•	advanced household collaboration
+
+12. Use cases
+
+Primary
+	1.	Rebuild my common household basket
+	2.	Restock household staples
+	3.	Buy the right version of a familiar item
+	4.	Compare where to buy based on price + speed + trust
+	5.	Automatically reorder safe, repeated products
+	6.	Handle a one-sentence delegated purchase
+
+Secondary
+	1.	Trip prep shopping
+	2.	Pharmacy and convenience refill support
+	3.	Event-based reminders and preparation
+	4.	“Replace this with the latest equivalent”
+
+13. Retailer and platform strategy
+
+We should optimize first for selection + speed + access, not retailer prestige.
+
+13.1 Best starting access layers
+
+Instacart is a top early platform because it explicitly offers APIs to build custom shopping experiences across its retailer network and connect users to products from local stores.  
+
+DoorDash and Uber Direct are strong for local delivery orchestration and speed-sensitive use cases, with public developer tooling and APIs for delivery workflows.  
+
+Walgreens is interesting for pharmacy/convenience because it has a formal developer program and API access.  
+
+13.2 Strategic but harder platforms
+
+Walmart matters for value and national breadth, but its official public APIs are oriented around marketplace partners, sellers, and fulfillment workflows rather than a consumer super-agent experience.  
+
+Amazon matters enormously for customer expectations on selection and speed, but public programmable access is more limited and controlled; Buy with Prime is a merchant-side surface, and Amazon’s broader developer ecosystem is policy-governed and revocable.  
+
+Target is strategically relevant, but the publicly visible movement appears more aligned with conversational discovery and advertising than open delegated checkout. Target is currently testing contextual ads in ChatGPT through Roundel.  
+
+13.3 MVP retailer thesis
+
+For v1, the product should say:
+“We use the stores you already trust, optimized for price, speed, and fit.”
+
+Practical v1 stack:
+	•	Instacart for local grocery breadth
+	•	DoorDash / Uber Direct for local speed and delivery orchestration
+	•	Walgreens for pharmacy/convenience cases
+	•	Walmart where partnership/access is practical
+	•	Amazon as roadmap-critical, not MVP-critical
+
+14. Core UX flows
+
+14.1 Onboarding flow
+	1.	Download app
+	2.	Promise screen: “We’ll rebuild how your household shops”
+	3.	Connect inputs:
+	•	email receipts
+	•	retailer accounts where possible
+	•	payment method
+	•	address
+	4.	Select priorities:
+	•	cheapest
+	•	fastest
+	•	balance
+	5.	Set starter policies:
+	•	categories to automate later
+	•	approval thresholds
+	•	preferred / blocked brands
+	6.	Generate first household shopping map
+	7.	Prompt first action: “Rebuild essentials basket”
+
+Onboarding KPI
+	•	time to first magic < 3 minutes target
+	•	first delegated action started in-session
+	•	first purchase in first session or first 24 hours
+
+14.2 “Rebuild my household” flow
+	1.	Agent surfaces likely staples and stores
+	2.	User confirms/edit common items
+	3.	Agent generates basket candidates
+	4.	Agent explains price/speed tradeoffs
+	5.	User approves
+	6.	Order is placed
+	7.	Agent asks to unlock future suggestions
+
+14.3 One-sentence delegate flow
+
+Input: “Buy me a new phone”
+
+System:
+	•	checks known device ecosystem
+	•	budget
+	•	storage history
+	•	merchant policy
+	•	insurance preference
+	•	shipping urgency
+
+Output:
+	•	recommendation
+	•	one or two missing questions max
+	•	proposed transaction plan
+	•	approval or execution
+
+14.4 Auto-buy flow
+	1.	Agent detects likely need
+	2.	Runs confidence + policy checks
+	3.	Places purchase
+	4.	Sends notification:
+	•	what was bought
+	•	why
+	•	from where
+	•	cancel/modify window
+	5.	Follows through post-purchase
+
+15. Policy engine
+
+This is a first-class product surface.
+
+Policy objects
+	•	max spend by order
+	•	max spend by category
+	•	monthly limits
+	•	preferred merchants
+	•	banned merchants
+	•	preferred brands
+	•	banned brands
+	•	shipping urgency rules
+	•	substitution rules
+	•	approval requirements
+	•	allowed payment methods
+	•	auto-buy-allowed categories
+	•	merchant trust thresholds
+	•	third-party seller rules
+	•	return-window minimums
+
+Example rules
+	•	never buy electronics over $500 without asking
+	•	for pantry staples, optimize lowest delivered total
+	•	never buy from third-party sellers with weak returns
+	•	only use same-day delivery for urgent categories
+	•	do not auto-buy apparel
+	•	only use Walgreens for OTC and convenience, not general household
+	•	never use BNPL
+
+16. Confidence engine
+
+The confidence engine determines whether the system should:
+	•	recommend
+	•	ask
+	•	buy
+	•	wait
+
+Inputs
+	•	preference match score
+	•	recurrence score
+	•	category risk score
+	•	merchant reliability
+	•	price deviation from norm
+	•	substitute similarity
+	•	reversibility of transaction
+	•	shipping fit
+	•	household context fit
+	•	user trust tier in category
+
+Output bands
+	•	0–39: recommend only
+	•	40–64: ask questions
+	•	65–84: propose purchase
+	•	85–94: buy with stop window
+	•	95+: proactive auto-buy if policy permits
+
+17. Payments and execution
+
+AiPay should evolve into the delegated transaction layer.
+
+Responsibilities
+	•	tokenized payment credentials
+	•	delegated authority scope
+	•	order approval state machine
+	•	merchant execution connectors
+	•	receipts and audit trail
+	•	exception handling
+	•	identity and shipping preferences
+
+Design principle
+
+The user is always the principal.
+The agent acts as an authorized delegate within explicit policy.
+
+18. Post-purchase control and recovery
+
+A core trust feature.
+
+Transaction states
+	•	Pending: not yet submitted
+	•	Cancelable: can stop before merchant processes
+	•	Reversible: merchant return/exchange still available
+	•	Irreversible: cannot unwind or extremely costly
+
+User controls
+	•	cancel
+	•	swap item
+	•	change retailer
+	•	adjust delivery speed
+	•	review rationale
+	•	report bad choice
+	•	tighten autonomy
+
+Product requirement
+
+Every autonomous action must include:
+	•	what happened
+	•	why it happened
+	•	what can still be changed
+	•	how to reduce future repeats of the same mistake
+
+19. Social and viral design
+
+We want organic product-led growth from undeniable first experiences.
+
+Shareable moments
+	•	“It rebuilt my household shopping in seconds”
+	•	“I said one sentence and it bought the right thing”
+	•	“It saved me from a worse seller / slower delivery / bad choice”
+	•	“It quietly handled staples I would have forgotten”
+
+Viral growth thesis
+
+Not referral-code-first. Story-first.
+
+Users should tell friends:
+	•	“This is how shopping will work now”
+	•	“It already knows what I buy”
+	•	“It actually saves me time”
+
+Built-in growth moments
+	•	shareable savings summary
+	•	shareable “household unlocked” moment
+	•	spouse/family invite after successful basket
+	•	“invite another household operator” after trust milestone
+
+20. Go-to-market
+
+20.1 Launch positioning
+
+Get your household brain back.
+
+Hero message
+
+Connect your stores. We’ll rebuild how your home shops — then start taking it off your plate.
+
+20.2 Launch persona
+
+Household operator in busy family households.
+
+20.3 Launch channels
+	•	short-form demo videos
+	•	mom / household operator creator partnerships
+	•	product-led referral loops
+	•	waitlist around “rebuild your household”
+	•	AI / future-of-commerce press story
+	•	targeted community seeding in affluent, convenience-sensitive households
+
+20.4 Timing principle
+
+Do not wait for universal retailer access.
+Launch when one use case feels undeniably magical.
+
+21. Metrics
+
+North Star
+
+Trusted household decisions completed per active household per month
+
+Trust metrics
+	•	acceptance rate
+	•	edit-before-buy rate
+	•	return rate
+	•	complaint rate
+	•	trust tier progression
+	•	% of auto-buys left unchanged
+
+Engagement metrics
+	•	weekly active households
+	•	tasks delegated per household
+	•	repeat household sessions
+	•	time to first purchase
+	•	categories unlocked
+
+Commerce metrics
+	•	GMV mediated
+	•	avg basket size
+	•	frequency of replenishment orders
+	•	retailer success rate
+	•	cancellation rate
+	•	order completion rate
+
+Experience metrics
+	•	minutes saved per household
+	•	price improvement vs baseline
+	•	delivery outcome quality
+	•	first-session wow completion
+	•	NPS after first delegated purchase
+
+22. Success criteria for MVP
+
+In the first 6 months post-launch, success looks like:
+	•	users complete first useful shopping action in first session
+	•	households return weekly
+	•	at least one category reaches trusted delegated buying
+	•	auto-buy opt-in happens after repeated success
+	•	users describe the product as “relief,” not “interesting”
+	•	referrals come from experience, not discounts
+
+23. Risks
+
+Retailer hostility
+
+Some retailers will not want an abstraction layer owning customer intent. The Amazon/Perplexity dispute is a clear warning.  
+
+Thin access surfaces
+
+Public API support is uneven, and some integrations will require partnerships rather than pure self-serve development.  
+
+Wrong purchase risk
+
+A single bad autonomous decision can damage trust disproportionately.
+
+Margin compression
+
+If the business relies only on affiliate economics, it may become operationally expensive without enough upside.
+
+Support burden
+
+Owning the transaction flow creates user expectations around reversal, support, and blame.
+
+24. Moat
+
+The moat is not the chat interface.
+
+The moat is the compound system of:
+	•	preference memory
+	•	policy controls
+	•	trust scoring
+	•	merchant routing
+	•	payment delegation
+	•	post-purchase recovery
+	•	household graph
+	•	outcome learning
+
+In short:
+The moat is the trust graph for delegated commerce.
+
+25. Roadmap
+
+Phase 1: Household intelligence
+	•	onboarding
+	•	preference capture
+	•	retailer/account connections
+	•	“rebuild my household”
+	•	delegate mode for staples
+
+Phase 2: Delegated commerce
+	•	stronger policy engine
+	•	one-sentence buying
+	•	limited purchase execution
+	•	rationale layer
+	•	category trust progression
+
+Phase 3: Narrow auto-buy
+	•	proactive replenishment
+	•	stop window
+	•	post-purchase controls
+	•	household trust milestones
+
+Phase 4: Platformization
+	•	AiPay wallet + delegated authority APIs
+	•	merchant/agent connectors
+	•	third-party assistant integrations
+	•	broader convenience OS positioning
+
+26. Open questions
+	1.	Should the brand lead with “shopping assistant” or “household autopilot”?
+	2.	How much retailer account connectivity do we need in v1 versus email/receipt inference?
+	3.	Do we begin with grocery-first, household-first, or mixed staples/pharmacy?
+	4.	Is the first viral moment “rebuild my household” or “buy from one sentence”?
+	5.	Should Amazon be visible in product promise before it is fully integrated?
+	6.	What is the first paid model: subscription, take-rate, or hybrid?
+	7.	How aggressively should autonomy unlock by default versus manual opt-in?
+
+27. Founder recommendation
+
+Build the company around this sentence:
+
+AiPay is the trust and execution layer for delegated commerce.
+
+And build the product around this sentence:
+
+An AI assistant that learns your household, follows your rules, and gradually takes shopping off your plate.
+

@@ -1,0 +1,449 @@
+/aipay_founder_pack/03-data-model.md
+# AiPay Home — Data Model
+
+## Overview
+
+The data model should support:
+
+- user and household context
+- preferences and policies
+- tasks and recommendations
+- merchant offers and orders
+- trust progression
+- delegated authorization
+- post-purchase recovery
+
+Below is a pragmatic v1 domain model.
+
+## Core Entities
+
+## User
+Represents an individual user.
+
+Fields:
+- user_id
+- household_id
+- email
+- phone
+- created_at
+- updated_at
+- default_priority_mode
+- default_payment_method_id
+- default_address_id
+- onboarding_state
+
+Notes:
+- each user belongs to one household in v1
+- future versions may support more complex membership models
+
+## Household
+Represents the shopping context shared across members.
+
+Fields:
+- household_id
+- name
+- created_at
+- updated_at
+- default_policy_id
+
+## HouseholdMember
+Represents membership and role.
+
+Fields:
+- household_member_id
+- household_id
+- user_id
+- role
+- can_approve_orders
+- can_manage_policies
+- can_manage_autopilot
+
+## Address
+Represents shipping destinations.
+
+Fields:
+- address_id
+- household_id
+- label
+- line1
+- line2
+- city
+- state
+- postal_code
+- country
+- is_default
+
+## PaymentMethodRef
+Represents tokenized or referenced payment instruments.
+
+Fields:
+- payment_method_id
+- household_id
+- provider
+- last4
+- brand
+- token_ref
+- is_default
+- created_at
+
+Important:
+- never store raw PAN in this system
+
+## MerchantProfile
+Represents a merchant or rail.
+
+Fields:
+- merchant_id
+- name
+- merchant_type
+- trust_score
+- fulfillment_score
+- return_score
+- is_enabled
+- metadata_json
+
+Examples of merchant_type:
+- retailer
+- grocery_aggregator
+- delivery_rail
+- pharmacy
+
+## MerchantPreference
+Represents user or household preference for merchants.
+
+Fields:
+- merchant_preference_id
+- household_id
+- merchant_id
+- status
+- rank
+- created_at
+
+Possible status values:
+- preferred
+- neutral
+- blocked
+
+## ProductFamily
+Represents a normalized product grouping across merchants.
+
+Fields:
+- product_family_id
+- normalized_name
+- category
+- subcategory
+- brand
+- attributes_json
+
+Examples:
+- paper_towels_brand_x_6_roll
+- iphone_pro_256gb_black
+
+## ProductOffer
+Represents a merchant-specific sellable offer.
+
+Fields:
+- offer_id
+- merchant_id
+- product_family_id
+- merchant_sku
+- title
+- price
+- currency
+- delivery_eta
+- availability_status
+- seller_type
+- return_window_days
+- metadata_json
+- observed_at
+
+## ProductPreference
+Represents household preference for a product family or variant.
+
+Fields:
+- product_preference_id
+- household_id
+- product_family_id
+- favored_brand
+- blocked_brands_json
+- preferred_pack_size
+- substitution_tolerance
+- price_sensitivity
+- notes
+- created_at
+- updated_at
+
+## Policy
+Represents rules governing recommendations and purchases.
+
+Fields:
+- policy_id
+- household_id
+- scope_type
+- scope_value
+- max_spend
+- approval_required
+- autopilot_allowed
+- substitution_rule
+- allowed_merchants_json
+- blocked_merchants_json
+- allowed_brands_json
+- blocked_brands_json
+- created_at
+- updated_at
+
+Examples of scope_type:
+- global
+- category
+- product_family
+- merchant
+
+## Task
+Represents a shopping mission or intent.
+
+Fields:
+- task_id
+- household_id
+- created_by_user_id
+- task_type
+- raw_input
+- normalized_intent_json
+- status
+- confidence_score
+- mode
+- created_at
+- updated_at
+
+Possible task_type values:
+- rebuild_basket
+- restock
+- explore
+- delegated_purchase
+- autopilot_trigger
+
+Possible mode values:
+- explore
+- delegate
+- auto
+
+## Recommendation
+Represents a system-proposed action or plan.
+
+Fields:
+- recommendation_id
+- task_id
+- recommendation_type
+- rationale_text
+- confidence_score
+- proposed_payload_json
+- created_at
+
+Examples of recommendation_type:
+- item_choice
+- basket_plan
+- merchant_route
+- autopilot_purchase
+
+## Basket
+Represents a proposed or approved grouped purchase.
+
+Fields:
+- basket_id
+- household_id
+- task_id
+- status
+- total_price
+- currency
+- merchant_route_strategy
+- created_at
+- updated_at
+
+Possible status values:
+- draft
+- proposed
+- approved
+- submitted
+- canceled
+
+## BasketItem
+Represents a line item within a basket.
+
+Fields:
+- basket_item_id
+- basket_id
+- product_family_id
+- selected_offer_id
+- quantity
+- rationale_text
+- user_edited
+- created_at
+- updated_at
+
+## Order
+Represents an executed or submitted purchase.
+
+Fields:
+- order_id
+- household_id
+- task_id
+- merchant_id
+- basket_id
+- status
+- total_price
+- currency
+- submitted_at
+- cancelable_until
+- reversible_until
+- rationale_text
+- created_at
+- updated_at
+
+Possible status values:
+- pending
+- submitted
+- fulfilled
+- canceled
+- returned
+- failed
+
+## OrderItem
+Represents a purchased line item.
+
+Fields:
+- order_item_id
+- order_id
+- product_family_id
+- selected_offer_id
+- quantity
+- final_price
+- created_at
+
+## AuthorizationScope
+Represents delegated purchase permissions.
+
+Fields:
+- authorization_scope_id
+- household_id
+- category
+- max_spend
+- approval_mode
+- payment_method_id
+- enabled
+- created_at
+- updated_at
+
+Possible approval_mode values:
+- always_require_approval
+- allow_stop_window
+- full_autopilot
+
+## TrustProfile
+Represents category-level trust state.
+
+Fields:
+- trust_profile_id
+- household_id
+- category
+- trust_level
+- trust_score
+- last_updated_at
+
+Possible trust_level values:
+- L0
+- L1
+- L2
+- L3
+- L4
+- L5
+
+## TrustLedgerEvent
+Represents a trust-affecting outcome.
+
+Fields:
+- trust_event_id
+- household_id
+- category
+- source_type
+- source_id
+- action_type
+- accepted
+- edited
+- canceled
+- returned
+- feedback
+- trust_delta
+- created_at
+
+Examples of source_type:
+- recommendation
+- order
+- autopilot_purchase
+
+## FeedbackEvent
+Represents explicit user feedback.
+
+Fields:
+- feedback_event_id
+- household_id
+- source_type
+- source_id
+- feedback_type
+- notes
+- created_at
+
+Examples of feedback_type:
+- wrong_brand
+- wrong_size
+- too_expensive
+- wrong_merchant
+- too_slow
+- good_choice
+
+## Suggested Relationships
+
+- Household has many Users through HouseholdMember
+- Household has many Policies
+- Household has many ProductPreferences
+- Household has many Tasks
+- Household has many Orders
+- Household has many TrustProfiles
+- Task has many Recommendations
+- Task may produce one Basket
+- Basket has many BasketItems
+- Order has many OrderItems
+- MerchantProfile has many ProductOffers
+- ProductFamily has many ProductOffers
+
+## Modeling Notes
+
+### 1. Trust is category-specific
+Trust should not be modeled as a single global number.
+
+### 2. Product family normalization matters
+Do not rely only on merchant SKUs. Cross-merchant equivalence is critical for comparison and substitution.
+
+### 3. Policy scope must be flexible
+Rules should support:
+- global defaults
+- category rules
+- product-family-specific rules
+- merchant-specific rules
+
+### 4. Recommendations should be persisted
+Do not treat recommendations as ephemeral UI output. Persist them for auditability, learning, support, and analytics.
+
+### 5. Order recovery state matters
+Cancelable and reversible windows must be explicit fields to support user trust and control.
+
+## Future Entities
+
+Likely later additions:
+- RetailerAccountConnection
+- ReceiptImport
+- SubscriptionPlan
+- Promotion / Coupon
+- DeliveryEvent
+- ReturnCase
+- DisputeCase
+- HouseholdRoutine
+- ExternalAssistantIntegration
