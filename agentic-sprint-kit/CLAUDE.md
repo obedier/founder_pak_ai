@@ -5,6 +5,31 @@ Your job: take PROMPT.md and build a fully tested, functional product that meets
 the USER's objectives — not just technically correct code — with zero human input
 beyond answering up to 10 clarifying questions.
 
+## Modes
+
+### Default Mode (new project)
+Triggered when: user provides a prompt, or PROMPT.md exists with content.
+Behavior: Read PROMPT.md, ask clarifying questions, build from scratch.
+
+### Redo Mode (`--redo`)
+Triggered when: user's message contains `--redo` or a `.redo` marker file exists.
+Behavior: Analyze the existing project in the original directory, generate a
+PROMPT.md for an improved rebuild, ask clarifying questions, then build the
+improved version in this directory.
+
+**Redo setup steps** (before Phase 0):
+1. Read the `.redo` marker file to find `ORIGINAL_PROJECT` path
+2. Run Phase 0 using `.claude/skills/kit-redo-intake/SKILL.md` (NOT kit-intake)
+   — this reads the ORIGINAL project, writes PROMPT.md + REDO_ANALYSIS.md here
+3. After user answers questions, all remaining phases (1 through 4) run normally
+
+The agent team reads the redo analysis and decides whether to:
+- **Start fresh**: build everything new, informed by what went wrong
+- **Selective reuse**: copy specific files/modules that are high quality
+- **Heavy reuse**: fork the original and refactor
+
+This decision is documented in `docs/DECISION_LOG.md` with rationale.
+
 ## Phases (run automatically in sequence)
 
 After the user answers clarifying questions, execute ALL phases without stopping.
@@ -13,6 +38,7 @@ Read the skill file for each phase to get detailed instructions.
 | Phase | Instructions | What happens |
 |-------|-------------|-------------|
 | 0 | `.claude/skills/kit-intake/SKILL.md` | Read PROMPT.md, ask up to 10 questions, WAIT |
+| 0 (redo) | `.claude/skills/kit-redo-intake/SKILL.md` | Analyze existing project, generate PROMPT.md, ask questions, WAIT |
 | 1 | `.claude/skills/kit-spec/SKILL.md` | Generate all docs/ specs (no code yet) |
 | 1.5 | `.claude/skills/kit-validate/SKILL.md` | Verify specs serve user objectives |
 | 2 | `.claude/skills/kit-scaffold/SKILL.md` | Project skeleton, shared types, stubs |
@@ -41,6 +67,9 @@ product direction (PROMPT.md sections 1-4, 8). It monitors for blockers, resolve
 open questions, fixes stalled work, and keeps all agents productive.
 See `agent_docs/agent-roles.md` (ScrumMaster section) for full authority.
 
+In redo mode, the SM also has access to the original project and can reference
+it when resolving questions or making decisions.
+
 ## Reference Docs (read when needed, not upfront)
 
 - `agent_docs/agent-roles.md` — all agent roles including SM and Product Agent
@@ -58,3 +87,11 @@ See `agent_docs/agent-roles.md` (ScrumMaster section) for full authority.
 - **Magic moment early**: Sprint 1 must deliver visible user value, not just backend plumbing.
 - **Test against criteria**: Tests verify WHEN-THEN-SHALL acceptance criteria, not implementation.
 - **Log decisions**: Append to docs/DECISION_LOG.md. Flag questions in docs/OPEN_QUESTIONS.md.
+
+### Redo-Specific Rules
+
+- **Better, not different**: The goal is an improved version of the same product, not a new product.
+- **Respect original intent**: The original project's purpose is sacred — improve execution, not direction.
+- **Preserve what works**: Don't rebuild working code just because you can. Justify every change.
+- **Fix root causes**: If the original has problems, fix the architecture, not just symptoms.
+- **Document the delta**: `docs/REDO_ANALYSIS.md` must clearly show what changed and why.
