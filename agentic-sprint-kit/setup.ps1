@@ -60,10 +60,94 @@ $CcnContent = @'
 # Agentic Sprint Kit — ccn command (PowerShell)
 param(
     [switch]$Redo,
+    [switch]$Help,
+    [switch]$Version,
     [string]$Path = "."
 )
 
 $KitSrc = Join-Path $env:USERPROFILE ".agentic-sprint-kit"
+
+if ($Help) {
+    @"
+CCN(1)                    Agentic Sprint Kit                    CCN(1)
+
+NAME
+    ccn - create and build software projects autonomously with AI agents
+
+SYNOPSIS
+    ccn
+    ccn -Redo [-Path <path>]
+    ccn -Help
+    ccn -Version
+
+DESCRIPTION
+    ccn bootstraps a new project directory with the Agentic Sprint Kit,
+    then launches Claude Code in auto-mode to build the entire project
+    autonomously. You describe what you want in one sentence, answer up
+    to 10 clarifying questions, and the system handles everything else:
+    specs, code, tests, and QA.
+
+COMMANDS
+    ccn
+        Create a new project. Prompts for a project name, copies the kit,
+        initializes git, and launches Claude Code.
+
+    ccn -Redo [-Path <path>]
+        Rebuild an existing project. Analyzes the project at <path> (or
+        current directory if omitted), creates redo_<name>\ as a sibling,
+        and launches Claude Code in redo mode.
+
+    ccn -Help
+        Show this help text.
+
+    ccn -Version
+        Show the installed kit version.
+
+BUILD PHASES (auto-chained, no manual intervention)
+    Phase 0     Intake - ask up to 10 clarifying questions (only pause)
+    Phase 1     Spec generation - architecture, data model, contracts, flows
+    Phase 1.5   Product validation - magic moment, first experience, sprints
+    Phase 2     Scaffold - project skeleton, typed contracts, stubs
+    Phase 2.5   Test generation - all tests from acceptance criteria
+    Phase 3     Sprint execution - parallel agents in worktrees (loops)
+    Phase 4     QA - end-to-end verification + product review + STATUS.md
+
+SKILLS
+    /kit-intake         Phase 0: clarifying questions (new projects)
+    /kit-redo-intake    Phase 0: audit + rebuild (redo mode)
+    /kit-spec           Phase 1: generate all spec documents
+    /kit-validate       Phase 1.5: product validation
+    /kit-scaffold       Phase 2: project skeleton
+    /kit-tests          Phase 2.5: generate tests
+    /kit-sprint         Phase 3: sprint execution (repeats)
+    /kit-qa             Phase 4: QA and final report
+    /kit-sm             ScrumMaster background agent
+    /kit-status         Check project progress anytime
+    /remote-trainer     Run ML training on remote GPU via SSH
+
+EXAMPLES
+    # Create a new project
+    ccn
+
+    # Rebuild an existing project
+    cd ~\projects\my-app; ccn -Redo
+
+    # Rebuild from anywhere
+    ccn -Redo -Path ~\projects\my-app
+"@
+    return
+}
+
+if ($Version) {
+    $VersionFile = Join-Path $KitSrc "VERSION"
+    if (Test-Path $VersionFile) {
+        $v = Get-Content $VersionFile -Raw
+        Write-Host "ccn (Agentic Sprint Kit) $($v.Trim())"
+    } else {
+        Write-Host "ccn (Agentic Sprint Kit) 1.0.0"
+    }
+    return
+}
 
 if (-not (Test-Path $KitSrc)) {
     Write-Host "Error: agentic-sprint-kit not found at $KitSrc" -ForegroundColor Red
@@ -192,8 +276,12 @@ if ($ProfileContent -and $ProfileContent.Contains($Marker)) {
 
 # >>> agentic-sprint-kit ccn >>>
 function ccn {
-    param([switch]`$Redo, [string]`$Path = ".")
-    if (`$Redo) {
+    param([switch]`$Redo, [switch]`$Help, [switch]`$Version, [string]`$Path = ".")
+    if (`$Help) {
+        & "`$env:USERPROFILE\.agentic-sprint-kit\ccn.ps1" -Help
+    } elseif (`$Version) {
+        & "`$env:USERPROFILE\.agentic-sprint-kit\ccn.ps1" -Version
+    } elseif (`$Redo) {
         & "`$env:USERPROFILE\.agentic-sprint-kit\ccn.ps1" -Redo -Path `$Path
     } else {
         & "`$env:USERPROFILE\.agentic-sprint-kit\ccn.ps1"

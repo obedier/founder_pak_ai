@@ -81,6 +81,125 @@ else
 # Create new agentic project from a one-liner
 ccn() {
   local kit_src="$HOME/.agentic-sprint-kit"
+
+  # --- HELP ---
+  if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    cat << 'HELPTEXT'
+CCN(1)                    Agentic Sprint Kit                    CCN(1)
+
+NAME
+    ccn — create and build software projects autonomously with AI agents
+
+SYNOPSIS
+    ccn
+    ccn --redo [path]
+    ccn --help | -h
+    ccn --version | -v
+
+DESCRIPTION
+    ccn bootstraps a new project directory with the Agentic Sprint Kit,
+    then launches Claude Code in auto-mode to build the entire project
+    autonomously. You describe what you want in one sentence, answer up
+    to 10 clarifying questions, and the system handles everything else:
+    specs, code, tests, and QA.
+
+COMMANDS
+    ccn
+        Create a new project. Prompts for a project name, copies the kit,
+        initializes git, and launches Claude Code. You'll be asked for a
+        one-sentence description, then up to 10 clarifying questions.
+        After that, all phases run autonomously.
+
+    ccn --redo [path]
+        Rebuild an existing project. Analyzes the project at [path] (or
+        current directory if omitted), creates redo_<name>/ as a sibling,
+        and launches Claude Code in redo mode. Parallel agents audit the
+        original project's architecture, UX, and test quality, then build
+        an improved version.
+
+    ccn --help, -h
+        Show this help text.
+
+    ccn --version, -v
+        Show the installed kit version.
+
+BUILD PHASES (auto-chained, no manual intervention)
+    Phase 0     Intake — ask up to 10 clarifying questions (only pause)
+    Phase 1     Spec generation — architecture, data model, contracts, flows
+    Phase 1.5   Product validation — magic moment, first experience, sprints
+    Phase 2     Scaffold — project skeleton, typed contracts, stubs
+    Phase 2.5   Test generation — all tests from acceptance criteria
+    Phase 3     Sprint execution — parallel agents in worktrees (loops)
+    Phase 4     QA — end-to-end verification + product review + STATUS.md
+
+SKILLS (invoked automatically by the orchestrator)
+    /kit-intake         Phase 0: clarifying questions (new projects)
+    /kit-redo-intake    Phase 0: audit + rebuild (redo mode)
+    /kit-spec           Phase 1: generate all spec documents
+    /kit-validate       Phase 1.5: product validation
+    /kit-scaffold       Phase 2: project skeleton
+    /kit-tests          Phase 2.5: generate tests
+    /kit-sprint         Phase 3: sprint execution (repeats)
+    /kit-qa             Phase 4: QA and final report
+    /kit-sm             ScrumMaster background agent
+    /kit-status         Check project progress anytime
+    /remote-trainer     Run ML training on remote GPU via SSH
+
+AGENT ROLES
+    ScrumMaster     Keeps agents productive, resolves blockers, decides
+    Product         Ensures product meets user objectives
+    Architect       System boundaries, tech stack, data flow
+    Frontend        UI components, user flows, client-side logic
+    Backend         API endpoints, server logic, database ops
+    Engine          Domain-specific logic (ML, game engine, etc.)
+    Test            Write and maintain tests across all layers
+    Review          Post-sprint quality and spec-drift review
+
+FILES
+    ~/.agentic-sprint-kit/      Global kit installation
+    PROMPT.md                   Project description (you fill this in)
+    CLAUDE.md                   Orchestration guide (lean, 97 lines)
+    BEST_PRACTICES.md           Research-backed patterns and rationale
+    agent_docs/                 Agent reference docs (loaded on demand)
+    .claude/skills/             Phase skills and utilities
+    docs/                       Spec templates (populated during build)
+
+ENVIRONMENT
+    CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+        Enable parallel agent teams (optional, improves speed)
+
+EXAMPLES
+    # Create a new project
+    ccn
+    > Project name: my-saas-app
+    > "A SaaS dashboard that tracks customer health scores"
+    > (answers 10 questions, then autonomous build begins)
+
+    # Rebuild an existing project
+    cd ~/projects/my-app && ccn --redo
+
+    # Rebuild a project from anywhere
+    ccn --redo ~/projects/my-app
+
+SEE ALSO
+    Project README: ~/.agentic-sprint-kit/README.md
+    Best practices: ~/.agentic-sprint-kit/BEST_PRACTICES.md
+
+HELPTEXT
+    return 0
+  fi
+
+  # --- VERSION ---
+  if [ "$1" = "--version" ] || [ "$1" = "-v" ]; then
+    local version_file="$kit_src/VERSION"
+    if [ -f "$version_file" ]; then
+      echo "ccn (Agentic Sprint Kit) $(cat "$version_file")"
+    else
+      echo "ccn (Agentic Sprint Kit) 1.0.0"
+    fi
+    return 0
+  fi
+
   if [ ! -d "$kit_src" ]; then
     echo "Error: agentic-sprint-kit not found at $kit_src"
     echo "  Re-run the installer: cd <kit-repo> && ./setup.sh"
